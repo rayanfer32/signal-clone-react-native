@@ -1,8 +1,9 @@
-import React, { useState} from 'react'
+import React, { useState , useLayoutEffect } from 'react'
 import { KeyboardAvoidingView, ScrollView, StyleSheet, View } from 'react-native'
 import Text from "../components/Text"
 import { StatusBar } from "expo-status-bar"
 import { Button, Input, Image} from "react-native-elements"
+import { auth } from '../firebase'
 
 const RegisterScreen = ({ navigation }) => {
     
@@ -11,8 +12,22 @@ const RegisterScreen = ({ navigation }) => {
     const [password, setPassword] = useState("")
     const [imageUrl, setImageUrl] = useState("")
 
-    const register = () => {
+    useLayoutEffect(() => {
+        navigation.setOptions({
+                headerBackTitle: "B"
+            })
 
+    }, [navigation])
+    
+    const register = () => {
+        auth.createUserWithEmailAndPassword(email, password)
+        .then((authUser) => {
+            authUser.user.updateProfile({
+                displayName: name,
+                photoURL: imageUrl || "https://crypto.nexus.io/images/shirt-icon.png"
+            })
+        })
+        .catch(error => alert(error.message))
     }
 
     return (
@@ -66,6 +81,7 @@ const styles = StyleSheet.create({
     },
     inputContainer: {
         width: 300,
+        
     },
     button: {
         width: 200,
