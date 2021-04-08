@@ -127,7 +127,7 @@ const ChatScreen = ({ navigation, route }) => {
                                 </View>
                              ) : (
 
-                                 <View style={styles.sender} >
+                                 <View key={id} style={styles.sender} >
                                     <Avatar 
                                         rounded
                                       
