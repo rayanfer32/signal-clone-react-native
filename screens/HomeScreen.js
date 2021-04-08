@@ -12,7 +12,9 @@ import { db } from "../firebase"
 
 const HomeScreen = ({ navigation }) => {
 
+   
     const [chats, setChats] = useState([])
+
 
     useEffect(() => {
         const unsubscribe = db.collection("chats").onSnapshot(snapshot => (
@@ -40,8 +42,7 @@ const HomeScreen = ({ navigation }) => {
             headerLeft: () => 
                 (<View style={{  marginLeft: 10}} >
                     <TouchableOpacity onPress={signOutUser} activeOpacity={0.5}> 
-                        <Avatar rounded source={{ uri: "https://avatars.githubusercontent.com/u/37145078?v=4"}} />
-                        {/* <Avatar rounded source={{uri: auth?.currentUser?.photoURL }} /> */}
+                        <Avatar rounded source={{uri:  "https://bitcoinexchangeguide.com/wp-content/uploads/2018/06/nexus-nxs-coin-binance-exchange-listing.jpg" }} />
                     </TouchableOpacity>
                  </View>) ,
             headerRight: () => 
